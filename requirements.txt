@@ -1,0 +1,9 @@
+NumPy== 1.26.4
+Pandas==2.2.3
+Matplotlib ==  3.7.5
+Seaborn ==  0.12.2
+TensorFlow ==  2.16.1
+Pillow==10.4.0
+scikit_learn  == 1.2.2
+streamlit==1.27.2
+keras == 3.3.3
