@@ -29,10 +29,10 @@ model = load_model('model.h5')
   # Update with actual weights file
 
 # Streamlit app
-st.title("Cattle Breed Classifier")
+st.title(" 🐮🐄 Cattle Breed Classifier")
 
 # Upload image
-uploaded_file = st.file_uploader("Choose a cattle image...")
+uploaded_file = st.file_uploader("Choose a   🐄🐄 cattle image...")
 
 if uploaded_file is not None:
     
@@ -65,4 +65,6 @@ if uploaded_file is not None:
 
     
     breed = classes[np.argmax(predg[0])]
-    st.write(f"Predicted Cattle Breed: {breed}")
+    st.markdown(f"<h2><b>  🐮Predicted Cattle Breed: {breed} 🐄 </b></h2>", unsafe_allow_html=True)
+
+    
