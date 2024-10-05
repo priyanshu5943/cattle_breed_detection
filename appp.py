@@ -25,7 +25,7 @@ from tensorflow.keras.applications.inception_resnet_v2 import preprocess_input a
 from tensorflow.keras.applications.nasnet import preprocess_input as preprocess_nasnet
 
 # Load the model
-model = load_model(r'C:\Users\Nasem\Pictures\breed_app\model.h5')
+model = load_model('model.h5')
   # Update with actual weights file
 
 # Streamlit app
