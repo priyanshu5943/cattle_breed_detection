@@ -41,7 +41,8 @@ if uploaded_file is not None:
     img_g = load_img(uploaded_file,target_size = img_size)
     img_g = np.expand_dims(img_g, axis=0)
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", use_column_width=True)
+    st.image(image, caption="Uploaded Image.", width=200)
+    
     
     # Preprocess the image
     test_features = helper.extact_features(img_g)
