@@ -41,7 +41,7 @@ if uploaded_file is not None:
     img_g = load_img(uploaded_file,target_size = img_size)
     img_g = np.expand_dims(img_g, axis=0)
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", width=200)
+    st.image(image, caption="Uploaded Image.", width=400)
     
     
     # Preprocess the image
