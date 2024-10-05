@@ -35,37 +35,41 @@ st.title(" 🐮🐄 Cattle Breed Classifier")
 uploaded_file = st.file_uploader("Choose a   🐄🐄 cattle image...")
 
 if uploaded_file is not None:
-    
-    # Display image
-    img_size = (331,331,3)
-    img_g = load_img(uploaded_file,target_size = img_size)
-    img_g = np.expand_dims(img_g, axis=0)
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", width=400)
-    
-    
-    # Preprocess the image
-    test_features = helper.extact_features(img_g)
-    predg = model.predict(test_features)
+    # Create two columns
+    col1, col2 = st.columns(2)
 
-    classes = [
-    'Alambadi',
-    'Amritmahal',
-    'Ayrshire',
-    'Banni',
-    'Bargur',
-    'Bhadawari',
-    'Brown Swiss',
-    'Dangi',
-    'Deoni',
-    'Gir',
-    'Guernsey',
-    'Hallikar'
-]
+    with col1:
+        # Display image in the left column
+        img_size = (331, 331, 3)
+        img_g = load_img(uploaded_file, target_size=img_size)
+        img_g = np.expand_dims(img_g, axis=0)
+        image = Image.open(uploaded_file)
+        st.image(image, caption="Uploaded Image.", width=400)
 
+    with col2:
+        # Preprocess the image and predict the breed
+        test_features = helper.extact_features(img_g)
+        predg = model.predict(test_features)
 
-    
-    breed = classes[np.argmax(predg[0])]
-    st.markdown(f"<h2><b>  🐮Predicted Cattle Breed: {breed} 🐄 </b></h2>", unsafe_allow_html=True)
+        classes = [
+            'Alambadi',
+            'Amritmahal',
+            'Ayrshire',
+            'Banni',
+            'Bargur',
+            'Bhadawari',
+            'Brown Swiss',
+            'Dangi',
+            'Deoni',
+            'Gir',
+            'Guernsey',
+            'Hallikar'
+        ]
+
+        breed = classes[np.argmax(predg[0])]
+
+        # Display the predicted breed in the right column
+        st.markdown(f"<h2><b>  🐮Predicted Cattle Breed: {breed} 🐄 </b></h2>", unsafe_allow_html=True)
+
 
     
