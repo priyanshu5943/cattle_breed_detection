@@ -2,37 +2,41 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import gc
-import numpy as np
-import pandas as pd
 from sklearn.model_selection import train_test_split
-import helper
 import tensorflow as tf
-from tensorflow.keras import Sequential
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-from tensorflow.keras.optimizers import Adam, SGD
-from tensorflow.keras.layers import Flatten, Dense, BatchNormalization, Activation, Dropout, GlobalAveragePooling2D, Input
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.models import Model, load_model
-from tensorflow.keras.preprocessing.image import load_img
-from PIL import Image
-import streamlit as st
+from tqdm.autonotebook import tqdm
 
-# Import specific models and preprocessing functions to avoid conflicts
-from tensorflow.keras.applications import InceptionV3, Xception, InceptionResNetV2, NASNetLarge
-from tensorflow.keras.applications.inception_v3 import preprocess_input as preprocess_inceptionv3
-from tensorflow.keras.applications.xception import preprocess_input as preprocess_xception
-from tensorflow.keras.applications.inception_resnet_v2 import preprocess_input as preprocess_inceptionresnetv2
-from tensorflow.keras.applications.nasnet import preprocess_input as preprocess_nasnet
+import numpy as np #
+import pandas as pd 
+
+from keras import Sequential
+from keras.callbacks import EarlyStopping
+import helper
+from keras.optimizers import Adam, SGD
+from keras.callbacks import ReduceLROnPlateau
+from keras.layers import Flatten,Dense,BatchNormalization,Activation,Dropout
+from keras.layers import Lambda, Input, GlobalAveragePooling2D,BatchNormalization
+from keras.utils import to_categorical
+# from keras import regularizers
+from keras.models import Model
+from keras.preprocessing.image import load_img
+from PIL import Image
+from keras.models import load_model
+import streamlit as st
+from keras.applications.inception_v3 import InceptionV3, preprocess_input
+from keras.applications.xception import Xception, preprocess_input
+from keras.applications.inception_resnet_v2 import InceptionResNetV2, preprocess_input
+from keras.applications.nasnet import NASNetLarge, preprocess_input
 
 # Load the model
-model = load_model('model.h5')
+model = load_model('C:\Users\Nasem\Pictures\cattle_breed_detection_app\cattle_breed_model.h5')
   # Update with actual weights file
 
 # Streamlit app
-st.title(" 🐮🐄 Cattle Breed Classifier")
+st.title("Cattle Breed Classifier")
 
 # Upload image
-uploaded_file = st.file_uploader("Choose a   🐄🐄 cattle image...")
+uploaded_file = st.file_uploader("Choose a cattle image...")
 
 if uploaded_file is not None:
     
@@ -41,12 +45,15 @@ if uploaded_file is not None:
     img_g = load_img(uploaded_file,target_size = img_size)
     img_g = np.expand_dims(img_g, axis=0)
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", width=400)
-    
+    st.image(image, caption="Uploaded Image.", use_column_width=True)
     
     # Preprocess the image
     test_features = helper.extact_features(img_g)
     predg = model.predict(test_features)
+
+
+    
+
 
     classes = [
     'Alambadi',
@@ -66,7 +73,9 @@ if uploaded_file is not None:
 
     
     breed = classes[np.argmax(predg[0])]
-    st.markdown(f"<h2><b>  Predicted Cattle Breed: Jersey  </b></h2>", unsafe_allow_html=True)
+    st.write(f"Predicted Cattle Breed: {breed}")
+
+
 
 
     
