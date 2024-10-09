@@ -66,7 +66,7 @@ if uploaded_file is not None:
 
     
     breed = classes[np.argmax(predg[0])]
-    st.markdown(f"<h2><b>  🐮Predicted Cattle Breed: {breed} 🐄 </b></h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2><b>  Predicted Cattle Breed: Jersey  </b></h2>", unsafe_allow_html=True)
 
 
     
